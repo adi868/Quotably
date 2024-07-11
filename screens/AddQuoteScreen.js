@@ -1,17 +1,17 @@
-import React, { useState } from "react";
-import { View, Text, TextInput, StyleSheet, Pressable, Image } from "react-native";
+import React, { useState } from 'react';
+import { View, Text, TextInput, StyleSheet, Pressable, Image } from 'react-native';
 
 function AddQuoteScreen({ navigation }) {
-  const [quote, setQuote] = useState("");
-  const [author, setAuthor] = useState("");
+  const [quote, setQuote] = useState('');
+  const [author, setAuthor] = useState('');
 
   const handleAddQuote = () => {
-    navigation.navigate("Home", { newQuote: { quote, author } });
+    navigation.navigate('Home', { newQuote: { quote, author } });
   };
   return (
     <View style={styles.container}>
-      <Pressable title='Go back' style={styles.button} onPress={() => navigation.navigate("Home")}>
-        <Image source={require("../assets/back.png")} style={styles.image} />
+      <Pressable title='Go back' style={styles.button} onPress={() => navigation.navigate('Home')}>
+        <Image source={require('../assets/back.png')} style={styles.image} />
       </Pressable>
       <Text>Add Quote</Text>
       <TextInput style={styles.input} placeholder='Type or paste your quote here...' value={quote} onChangeText={setQuote} />
@@ -26,16 +26,16 @@ function AddQuoteScreen({ navigation }) {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    justifyContent: "center",
-    alignItems: "center",
+    justifyContent: 'center',
+    alignItems: 'center',
     padding: 20,
   },
   input: {
     height: 40,
-    borderColor: "gray",
+    borderColor: 'gray',
     borderWidth: 1,
     marginBottom: 20,
-    width: "80%",
+    width: '80%',
     paddingHorizontal: 10,
   },
 });
