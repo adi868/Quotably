@@ -1,12 +1,5 @@
 import React, { useState } from "react";
-import {
-  View,
-  Text,
-  TextInput,
-  StyleSheet,
-  Pressable,
-  Image,
-} from "react-native";
+import { View, Text, TextInput, StyleSheet, Pressable, Image } from "react-native";
 
 function AddQuoteScreen({ navigation }) {
   const [quote, setQuote] = useState("");
@@ -17,26 +10,12 @@ function AddQuoteScreen({ navigation }) {
   };
   return (
     <View style={styles.container}>
-      <Pressable
-        title="Go back"
-        style={styles.button}
-        onPress={() => navigation.navigate("Home")}
-      >
+      <Pressable title='Go back' style={styles.button} onPress={() => navigation.navigate("Home")}>
         <Image source={require("../assets/back.png")} style={styles.image} />
       </Pressable>
       <Text>Add Quote</Text>
-      <TextInput
-        style={styles.input}
-        placeholder="Type or paste your quote here..."
-        value={quote}
-        onChangeText={setQuote}
-      />
-      <TextInput
-        style={styles.input}
-        placeholder="Author (optional)"
-        value={author}
-        onChangeText={setAuthor}
-      />
+      <TextInput style={styles.input} placeholder='Type or paste your quote here...' value={quote} onChangeText={setQuote} />
+      <TextInput style={styles.input} placeholder='Author (optional)' value={author} onChangeText={setAuthor} />
       <Pressable onPress={handleAddQuote}>
         <Text>save</Text>
       </Pressable>
