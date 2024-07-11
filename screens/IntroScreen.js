@@ -14,7 +14,7 @@ function IntroScreen({ navigation }) {
       </View>
       <View style={styles.nameContainer}>
         <Text style={styles.name}>Do you want to add your name?</Text>
-        <TextInput style={styles.input} placeholder='your name' value={name} onChangeText={(text) => setName(text)} />
+        <TextInput style={styles.input} placeholder='your name' value={name} onChangeText={setName} />
       </View>
       <Pressable title='Go to Home' style={styles.button} onPress={() => navigation.navigate('Home', { userName: name })}>
         <Image source={require('../assets/arrow_forward.png')} style={styles.image} />
