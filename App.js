@@ -13,9 +13,9 @@ export default function App() {
   return (
     <NavigationContainer style={styles.container}>
       <Stack.Navigator initialRouteName="Intro">
-        <Stack.Screen name="Intro" component={IntroScreen} />
+        <Stack.Screen name="Intro" component={IntroScreen} options={{ headerShown: false }}/>
         <Stack.Screen name="Home" component={HomeScreen} />
-        <Stack.Screen name = "AddQuote" component = {AddQuote}/>
+        <Stack.Screen name = "AddQuote" component = {AddQuote} options={{ headerShown: false }}/>
       </Stack.Navigator>
     </NavigationContainer>
   );

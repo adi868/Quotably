@@ -1,6 +1,13 @@
 import React, { useState } from "react";
-import { StyleSheet, View, Text, Button, TouchableOpacity, Image, TextInput } from "react-native";
-import globalStyles from '../src/styles'; // Import global styles
+import {
+  StyleSheet,
+  View,
+  Text,
+  Pressable,
+  Image,
+  TextInput,
+} from "react-native";
+import globalStyles from "../src/styles"; // Import global styles
 
 function IntroScreen({ navigation }) {
   const [name, setName] = useState("");
@@ -9,48 +16,54 @@ function IntroScreen({ navigation }) {
     <View style={styles.container}>
       <View style={styles.introContainer}>
         <Text style={styles.heading}>Welcome</Text>
-        <Text style={styles.subHeading}>Store all your favorite quotes in one place</Text>
+        <Text style={styles.subHeading}>
+          Store all your favorite quotes in one place
+        </Text>
+        <Image source={require("../assets/plant.png")} />
       </View>
       <View style={styles.nameContainer}>
         <Text style={styles.name}>Do you want to add your name?</Text>
-        <TextInput style={styles.input}
+        <TextInput
+          style={styles.input}
           placeholder="your name"
           value={name}
           onChangeText={(text) => setName(text)}
         />
       </View>
-       <TouchableOpacity title="Go to Home" style={styles.button} onPress={() => navigation.navigate("Home", { userName: name })}>
-      <Image
-        source={require('../assets/arrow_forward.png')}
-        style={styles.image}
-      />
-    </TouchableOpacity>
+      <Pressable
+        title="Go to Home"
+        style={styles.button}
+        onPress={() => navigation.navigate("Home", { userName: name })}
+      >
+        <Image
+          source={require("../assets/arrow_forward.png")}
+          style={styles.image}
+        />
+      </Pressable>
     </View>
   );
 }
 
 const styles = StyleSheet.create({
-
   container: {
     flex: 1,
     backgroundColor: "#FFFEF7",
     alignItems: "center",
-    justifyContent: 'center',
+    justifyContent: "center",
+    paddingTop: 30,
   },
-  heading:{
+  heading: {
     fontSize: 37,
     paddingBottom: 20,
   },
-  subHeading:{
-    fontSize: 18
+  subHeading: {
+    fontSize: 18,
+    marginBottom: 30,
   },
   introContainer: {
-    flex: 1,
     alignItems: "center",
   },
-  nameContainer: {
-    flex: 1,
-  },
+  nameContainer: {},
   image: {
     width: 24,
     height: 24,
@@ -58,6 +71,7 @@ const styles = StyleSheet.create({
   name: {
     // fontFamily: 'ShipporiMincho-Regular',
     paddingBottom: 20,
+    fontSize: 18,
   },
   input: {
     borderRadius: 20,
@@ -68,16 +82,16 @@ const styles = StyleSheet.create({
     fontSize: 18,
     padding: 10,
     paddingLeft: 25,
-    backgroundColor: '#fff'
+    backgroundColor: "#fff",
   },
   button: {
-    alignSelf: 'flex-end',
-    alignItems: 'center',
-    justifyContent: 'center',
-    backgroundColor: '#DDDDDD',
-    padding: 10,
-    borderRadius: 5,
-  }
+    alignSelf: "flex-end",
+    alignItems: "center",
+    justifyContent: "center",
+    backgroundColor: "#f3f2ed",
+    padding: 40,
+    borderRadius: 100,
+  },
 });
 
 export default IntroScreen;
