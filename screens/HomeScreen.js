@@ -5,21 +5,70 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import globalStyles from '../src/styles'; // Import global styles
 
 function HomeScreen({ route, navigation }) {
-  const userName = route.params?.userName ?? '';
   const [quotes, setQuotes] = useState([]);
+  const [userName, setUserName] = useState('');
 
-  //listens for new quotes passed via navigation parameters and updates state accordingly
+  useEffect(() => {
+    // Load async storage data when component mount
+    const loadQuotes = async () => {
+      try {
+        const storedQuotes = await AsyncStorage.getItem('quotes');
+        if (storedQuotes) {
+          setQuotes(JSON.parse(storedQuotes));
+          console.log('Quotes loaded from storage:', JSON.parse(storedQuotes));
+        }
+      } catch (error) {
+        console.error('Failed to load quotes from storage', error);
+      }
+    };
+    const loadUserName = async() => {
+      try{
+        const storedUserName = await AsyncStorage.getItem('userName');
+        if(storedUserName){
+          setUserName(storedUserName)
+          console.log('Username loaded:', storedUserName)
+        }
+      }
+      catch(error){
+        console.log('Failed to load username from storage', error);
+      }
+    }
+    loadQuotes();
+    loadUserName();
+  }, []);
+
+  // Listens for new quotes passed via navigation parameters and updates state accordingly, add to async storage
   useEffect(() => {
     if (route.params?.newQuote) {
-      setQuotes((prevQuotes) => [...prevQuotes, route.params.newQuote]);
+      const updatedQuotes = [...quotes, route.params.newQuote];
+      setQuotes(updatedQuotes);
+      AsyncStorage.setItem('quotes', JSON.stringify(updatedQuotes))
+        .then(() => {
+          console.log('Quotes saved', updatedQuotes);
+        })
+        .catch((error) => {
+          console.error('Failed to save quotes', error);
+        });
     }
   }, [route.params?.newQuote]);
+
+   // Store and load user data on homescreen page
+  useEffect(() => {
+    if (route.params?.userName) {
+      const newUserName = route.params.userName;
+      setUserName(newUserName);
+      AsyncStorage.setItem('userName', newUserName)
+        .catch((error) => {
+          console.error('Failed to save username to storage', error);
+        });
+    }
+  }, [route.params?.userName]);
 
   return (
     <View style={styles.container}>
       {/* conditional check if username added */}
       <Text style={styles.heading}>Hello{userName ? `, ${userName}` : ''}</Text>
-      <Text>{route.params?.newQuote ? '' : `Add your first quote here`}</Text>
+      <Text>{quotes ? '' : `Add your first quote here`}</Text>
       {/* render quotes dynamically */}
       <FlatList data={quotes} keyExtractor={(item, index) => index.toString()} renderItem={({ item }) => <QuoteItem quote={item.quote} author={item.author} />} />
       <View style={styles.buttonContainer}>
