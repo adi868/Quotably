@@ -1,5 +1,5 @@
-import React from "react";
-import { View, Text, StyleSheet } from "react-native";
+import React from 'react';
+import { View, Text, StyleSheet } from 'react-native';
 
 const QuoteItem = ({ quote, author }) => {
   return (
@@ -17,13 +17,13 @@ const styles = StyleSheet.create({
   },
   quoteText: {
     fontSize: 18,
-    textAlign: "left",
+    textAlign: 'left',
     marginBottom: 20,
     // fontFamily: 'ShipporiMincho-Regular',
   },
   authorText: {
     fontSize: 16,
-    textAlign: "left",
+    textAlign: 'left',
     marginBottom: 20,
     // fontFamily: 'ShipporiMincho-Regular',
   },
