@@ -70,17 +70,28 @@ function HomeScreen({ route, navigation }) {
     }
   }, [route.params?.userName]);
 
+  const handleRemoveUserName = async() => {
+    try{
+      await AsyncStorage.removeItem('userName');
+      setUserName('');
+      navigation.navigate('Intro')
+      console.log('Username successfully removed')
+    }
+    catch(error){
+      console.log('Failed to remove username from storage', error)
+    }
+  }
+
   return (
     <View style={styles.container}>
-      {/* conditional check if username added */}
       <Text style={styles.heading}>Hello{userName ? `, ${userName}` : ''}</Text>
       <Text>{quotes ? '' : `Add your first quote here`}</Text>
-      {/* render quotes dynamically */}
       <FlatList data={quotes} keyExtractor={(item, index) => index.toString()} renderItem={({ item }) => <QuoteItem quote={item.quote} author={item.author} />} />
       <View style={styles.buttonContainer}>
         <Pressable title='Remove quote' style={styles.button}>
           <Image source={require('../assets/images/remove.png')} style={styles.image} />
         </Pressable>
+        <Pressable title="Remove username" onPress={handleRemoveUserName}><Text>Remove user</Text></Pressable>
         <Pressable title='Add a quote' style={styles.button} onPress={() => navigation.navigate('AddQuote')}>
           <Image source={require('../assets/images/add.png')} style={styles.image} />
         </Pressable>

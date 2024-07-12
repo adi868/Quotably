@@ -56,7 +56,6 @@ function SplashScreen({ navigation }) {
   return (
     <LinearGradient colors={['#fff', '#F4E27F']} style={styles.container}>
       <Animated.View style={[styles.circle_alt, { transform: [{ translateX: circlePositionAlt }] }]}/>
-        {/* <LinearGradient colors={['#fff', '#FFFCDF']}></LinearGradient> */}
       <Animated.View style={[styles.circle, { transform: [{ translateX: circlePosition }] }]}/>
       <View style={styles.text}>
         <Text style={styles.name}>Quotely</Text>
