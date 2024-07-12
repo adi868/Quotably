@@ -2,11 +2,17 @@ import React, { useState, useEffect } from 'react';
 import { StyleSheet, View, Text, Pressable, Image, FlatList } from 'react-native';
 import QuoteItem from '../components/QuoteItem';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import globalStyles from '../src/styles'; // Import global styles
+import { useFonts, ShipporiMincho_400Regular, ShipporiMincho_700Bold} from '@expo-google-fonts/shippori-mincho';
+
 
 function HomeScreen({ route, navigation }) {
   const [quotes, setQuotes] = useState([]);
   const [userName, setUserName] = useState('');
+
+  const [fontsLoaded] = useFonts({
+    ShipporiMincho_400Regular,
+    ShipporiMincho_700Bold
+  });
 
   useEffect(() => {
     // Load async storage data when component mount
@@ -73,10 +79,10 @@ function HomeScreen({ route, navigation }) {
       <FlatList data={quotes} keyExtractor={(item, index) => index.toString()} renderItem={({ item }) => <QuoteItem quote={item.quote} author={item.author} />} />
       <View style={styles.buttonContainer}>
         <Pressable title='Remove quote' style={styles.button}>
-          <Image source={require('../assets/remove.png')} style={styles.image} />
+          <Image source={require('../assets/images/remove.png')} style={styles.image} />
         </Pressable>
         <Pressable title='Add a quote' style={styles.button} onPress={() => navigation.navigate('AddQuote')}>
-          <Image source={require('../assets/add.png')} style={styles.image} />
+          <Image source={require('../assets/images/add.png')} style={styles.image} />
         </Pressable>
       </View>
     </View>
@@ -93,6 +99,7 @@ const styles = StyleSheet.create({
   heading: {
     fontSize: 30,
     paddingBottom: 20,
+    fontFamily: 'ShipporiMincho_700Bold'
   },
   buttonContainer: {
     width: '100%',

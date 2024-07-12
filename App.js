@@ -5,30 +5,32 @@ import IntroScreen from './screens/IntroScreen';
 import HomeScreen from './screens/HomeScreen';
 import AddQuote from './screens/AddQuoteScreen';
 import SplashScreen from './screens/SplashScreen';
-
-import { StyleSheet, Text, View } from 'react-native';
+import { StyleSheet, Text, View, SafeAreaView } from 'react-native';
 
 const Stack = createNativeStackNavigator();
 
 export default function App() {
   return (
-    <NavigationContainer style={styles.container}>
-      <Stack.Navigator initialRouteName='Splash'>
-        <Stack.Screen name='Splash' component={SplashScreen} options={{ headerShown: false }} />
-        <Stack.Screen name='Intro' component={IntroScreen} options={{ headerShown: false }} />
-        <Stack.Screen name='Home' component={HomeScreen} options={{ headerShown: false }} />
-        <Stack.Screen name='AddQuote' component={AddQuote} options={{ headerShown: false }} />
-      </Stack.Navigator>
-    </NavigationContainer>
+    <SafeAreaView style={styles.outer}>
+      <NavigationContainer style={styles.container}>
+        <Stack.Navigator initialRouteName='Splash'>
+          <Stack.Screen name='Splash' component={SplashScreen} options={{ headerShown: false }} />
+          <Stack.Screen name='Intro' component={IntroScreen} options={{ headerShown: false }} />
+          <Stack.Screen name='Home' component={HomeScreen} options={{ headerShown: false }} />
+          <Stack.Screen name='AddQuote' component={AddQuote} options={{ headerShown: false }} />
+        </Stack.Navigator>
+      </NavigationContainer>
+    </SafeAreaView>
   );
 }
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
     alignItems: 'center',
     justifyContent: 'center',
-    fontFamily: 'ShipporiMincho-Regular',
   },
+  outer: {
+    flex: 1, 
+  }
 });

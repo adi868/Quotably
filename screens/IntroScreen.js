@@ -10,14 +10,14 @@ function IntroScreen({ navigation }) {
       <View style={styles.introContainer}>
         <Text style={styles.heading}>Welcome</Text>
         <Text style={styles.subHeading}>Store all your favorite quotes in one place</Text>
-        <Image source={require('../assets/plant.png')} />
+        <Image source={require('../assets/images/plant.png')} />
       </View>
       <View style={styles.nameContainer}>
         <Text style={styles.name}>Do you want to add your name?</Text>
         <TextInput style={styles.input} placeholder='your name' value={name} onChangeText={setName} />
       </View>
       <Pressable title='Go to Home' style={styles.button} onPress={() => navigation.navigate('Home', { userName: name })}>
-        <Image source={require('../assets/arrow_forward.png')} style={styles.image} />
+        <Image source={require('../assets/images/arrow_forward.png')} style={styles.image} />
       </Pressable>
     </View>
   );
