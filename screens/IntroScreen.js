@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { StyleSheet, View, Text, Pressable, Image, TextInput } from 'react-native';
+import { StyleSheet, View, Text, Pressable, Image, TextInput, SafeAreaView } from 'react-native';
 import { useFonts, ShipporiMincho_400Regular, ShipporiMincho_700Bold } from '@expo-google-fonts/shippori-mincho';
 
 function IntroScreen({ navigation }) {
@@ -11,6 +11,7 @@ function IntroScreen({ navigation }) {
   });
 
   return (
+    <SafeAreaView style={styles.outer}>
     <View style={styles.container}>
       <View style={styles.introContainer}>
         <Text style={styles.heading}>Welcome</Text>
@@ -27,6 +28,7 @@ function IntroScreen({ navigation }) {
         </Pressable>
       </View>
     </View>
+    </SafeAreaView>
   );
 }
 
@@ -40,6 +42,10 @@ const styles = StyleSheet.create({
     paddingLeft: 10,
     paddingRight: 10,
     paddingBottom: 40,
+  },
+  outer: {
+    flex: 1,
+    backgroundColor: '#FFFEF7',
   },
   heading: {
     fontSize: 37,

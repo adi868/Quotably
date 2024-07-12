@@ -26,12 +26,12 @@ function SplashScreen({ navigation }) {
             navigation.navigate('Intro');
             console.log('Directing to intro screen');
           }
-        }, 2000);
+        }, 2100);
       } catch (error) {
         console.error('There was an error loading user', error);
         setTimeout(() => {
           navigation.navigate('Intro');
-        }, 2000);
+        }, 2100);
       }
     };
 

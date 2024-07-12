@@ -18,19 +18,26 @@ const QuoteItem = ({ quote, author }) => {
 const styles = StyleSheet.create({
   container: {
     marginVertical: 10,
-    padding: 10,
+    paddingVertical: 10,
+    borderBottomWidth: 1,
+    borderBottomColor: '#878383',
+    paddingBottom: 5,
+    width: '100%',
   },
   quoteText: {
     fontSize: 18,
     textAlign: 'left',
     marginBottom: 20,
-    fontFamily: 'ShipporiMincho_400Regular'
+    fontFamily: 'ShipporiMincho_400Regular',
+    color: "#342817",
+
   },
   authorText: {
     fontSize: 16,
     textAlign: 'left',
     marginBottom: 20,
-    fontFamily: 'ShipporiMincho_400Regular'
+    fontFamily: 'ShipporiMincho_400Regular',
+    color: "#000",
   },
 });
 

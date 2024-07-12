@@ -5,13 +5,12 @@ import IntroScreen from './screens/IntroScreen';
 import HomeScreen from './screens/HomeScreen';
 import AddQuote from './screens/AddQuoteScreen';
 import SplashScreen from './screens/SplashScreen';
-import { StyleSheet, Text, View, SafeAreaView } from 'react-native';
+import { StyleSheet, Text, View } from 'react-native';
 
 const Stack = createNativeStackNavigator();
 
 export default function App() {
   return (
-    <SafeAreaView style={styles.outer}>
       <NavigationContainer style={styles.container}>
         <Stack.Navigator initialRouteName='Splash'>
           <Stack.Screen name='Splash' component={SplashScreen} options={{ headerShown: false }} />
@@ -20,7 +19,6 @@ export default function App() {
           <Stack.Screen name='AddQuote' component={AddQuote} options={{ headerShown: false }} />
         </Stack.Navigator>
       </NavigationContainer>
-    </SafeAreaView>
   );
 }
 
@@ -30,7 +28,6 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
   },
-  outer: {
-    flex: 1, 
-  }
 });
+
+// remove safe area view
