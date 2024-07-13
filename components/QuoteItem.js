@@ -28,17 +28,16 @@ const styles = StyleSheet.create({
     paddingVertical: 10,
     borderBottomWidth: 1,
     borderBottomColor: '#878383',
-    paddingBottom: 5,
     width: '100%',
   },
   selected: {
-    backgroundColor: '#ddd',
+    backgroundColor: 'pink',
   },
   selectionMode: {
-    borderColor: 'blue', // Indicate selection mode
+    borderColor: 'black', 
   },
   quoteText: {
-    fontSize: 18,
+    fontSize: 16,
     textAlign: 'left',
     marginBottom: 20,
     fontFamily: 'ShipporiMincho_400Regular',
@@ -46,9 +45,9 @@ const styles = StyleSheet.create({
 
   },
   authorText: {
-    fontSize: 16,
+    fontSize: 14,
     textAlign: 'left',
-    marginBottom: 20,
+    marginBottom: 17,
     fontFamily: 'ShipporiMincho_400Regular',
     color: "#000",
   },
