@@ -29,5 +29,3 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
 });
-
-// remove safe area view

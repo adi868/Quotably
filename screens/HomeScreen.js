@@ -2,7 +2,10 @@ import React, { useState, useEffect } from 'react';
 import { StyleSheet, View, Text, Pressable, Image, FlatList, SafeAreaView } from 'react-native';
 import QuoteItem from '../components/QuoteItem';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import { useFonts, ShipporiMincho_400Regular, ShipporiMincho_700Bold } from '@expo-google-fonts/shippori-mincho';
+import { useFonts } from 'expo-font';
+import * as Splash from 'expo-splash-screen';
+
+Splash.preventAutoHideAsync();
 
 function HomeScreen({ route, navigation }) {
   const [quotes, setQuotes] = useState([]);
@@ -11,9 +14,14 @@ function HomeScreen({ route, navigation }) {
   const [isSelectionMode, setIsSelectionMode] = useState(false);
 
   const [fontsLoaded] = useFonts({
-    ShipporiMincho_400Regular,
-    ShipporiMincho_700Bold,
+    'Shippori': require('../assets/fonts/ShipporiMincho-Bold.ttf')
   });
+
+  useEffect(() => {
+    if (fontsLoaded) {
+      Splash.hideAsync();
+    }
+  }, [fontsLoaded]);
 
   useEffect(() => {
     const loadQuotes = async () => {
@@ -142,7 +150,7 @@ const styles = StyleSheet.create({
   heading: {
     fontSize: 27,
     paddingBottom: 20,
-    fontFamily: 'ShipporiMincho_700Bold',
+    fontFamily: 'Shippori',
     textAlign: 'left',
     color: '#2F2F2F',
   },
