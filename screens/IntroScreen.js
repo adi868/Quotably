@@ -1,33 +1,44 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { StyleSheet, View, Text, Pressable, Image, TextInput, SafeAreaView } from 'react-native';
-import { useFonts, ShipporiMincho_400Regular, ShipporiMincho_700Bold } from '@expo-google-fonts/shippori-mincho';
+import { useFonts } from 'expo-font';
+import * as Splash from 'expo-splash-screen';
 
 function IntroScreen({ navigation }) {
   const [name, setName] = useState('');
 
   const [fontsLoaded] = useFonts({
-    ShipporiMincho_400Regular,
-    ShipporiMincho_700Bold,
+    'Shippori': require('../assets/fonts/ShipporiMincho-Regular.ttf'),
+    'Shippori-SemiBold': require('../assets/fonts/ShipporiMincho-SemiBold.ttf'),
   });
+
+  useEffect(() => {
+    if (fontsLoaded) {
+      Splash.hideAsync();
+    }
+  }, [fontsLoaded]);
 
   return (
     <SafeAreaView style={styles.outer}>
-    <View style={styles.container}>
-      <View style={styles.introContainer}>
-        <Text style={styles.heading}>Welcome</Text>
-        <Text style={styles.subHeading}>Store all your favorite quotes in one place</Text>
-        <Image source={require('../assets/images/plant.png')} />
+      <View style={styles.container}>
+        <View style={styles.introContainer}>
+          <View style={styles.headingContainer}>
+            <Text style={styles.heading}>Welcome</Text>
+          </View>
+          <Text style={styles.subHeading}>Store all your favorite quotes in one place</Text>
+        </View>
+        <View style={styles.imageContainer}>
+          <Image style={styles.imageCenter} source={require('../assets/images/plant.png')} />
+        </View>
+        <View style={styles.nameContainer}>
+          <Text style={styles.name}>Do you want to add your name?</Text>
+          <TextInput style={styles.input} placeholder='your name' value={name} onChangeText={setName} />
+        </View>
+        <View style={styles.buttonContainer}>
+          <Pressable title='Go to Home' style={styles.button} onPress={() => navigation.navigate('Home', { userName: name })}>
+            <Image source={require('../assets/images/arrow_forward.png')} style={styles.image} />
+          </Pressable>
+        </View>
       </View>
-      <View style={styles.nameContainer}>
-        <Text style={styles.name}>Do you want to add your name?</Text>
-        <TextInput style={styles.input} placeholder='your name' value={name} onChangeText={setName} />
-      </View>
-      <View style={styles.buttonContainer}>
-        <Pressable title='Go to Home' style={styles.button} onPress={() => navigation.navigate('Home', { userName: name })}>
-          <Image source={require('../assets/images/arrow_forward.png')} style={styles.image} />
-        </Pressable>
-      </View>
-    </View>
     </SafeAreaView>
   );
 }
@@ -37,53 +48,59 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: '#FFFEF7',
     alignItems: 'center',
-    justifyContent: 'flex-start',
+    justifyContent: 'space-between',
     paddingTop: 40,
-    paddingLeft: 10,
-    paddingRight: 10,
-    paddingBottom: 40,
+    paddingLeft: 40,
+    paddingRight: 40,
+    paddingBottom: 30,
   },
   outer: {
     flex: 1,
-     backgroundColor: '#FFFEF7',
+    backgroundColor: '#FFFEF7',
   },
   heading: {
-    fontSize: 37,
+    fontSize: 32,
     paddingBottom: 10,
-    marginTop: 15,
-    fontFamily: 'ShipporiMincho_400Regular',
+    fontFamily: 'Shippori',
+    width: '100%',
+    textAlign: 'left',
+  },
+  headingContainer: {
     borderBottomWidth: 2,
     borderBottomColor: '#000',
-    marginBottom: 30,
     width: '100%',
+    marginBottom: 30,
+    marginLeft: 5,
+  },
+  imageContainer: {},
+  imageCenter: {
+    opacity: 0,
+    height: 200,
+    width: 250,
   },
   subHeading: {
     fontSize: 18,
-    marginBottom: 30,
-    fontFamily: 'ShipporiMincho_400Regular',
+    marginBottom: 20,
+    fontFamily: 'Shippori',
     textAlign: 'center',
   },
   introContainer: {
     alignItems: 'center',
-    maxWidth: 320,
-    marginBottom: 30,
+    marginBottom: 10,
+    width: '100%',
   },
-  nameContainer: {
-    maxWidth: 350,
-  },
+  nameContainer: {},
   buttonContainer: {
-    flex: 1,
     alignItems: 'flex-end',
     justifyContent: 'flex-end',
     width: '100%',
-    maxWidth: 350,
   },
   image: {
     width: 24,
     height: 24,
   },
   name: {
-    fontFamily: 'ShipporiMincho_400Regular',
+    fontFamily: 'Shippori',
     paddingBottom: 25,
     fontSize: 18,
     paddingLeft: 10,
@@ -98,8 +115,8 @@ const styles = StyleSheet.create({
     padding: 10,
     paddingLeft: 25,
     backgroundColor: '#fff',
-    fontFamily: 'ShipporiMincho_400Regular',
-    minWidth: 330,
+    fontFamily: 'Shippori',
+    minWidth: 310,
     marginLeft: -12,
   },
   button: {

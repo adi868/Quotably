@@ -28,7 +28,8 @@ function SplashScreen({ navigation }) {
         const userName = await AsyncStorage.getItem('userName');
         setTimeout(() => {
           if (userName) {
-            navigation.navigate('Home', { userName });
+            // navigation.navigate('Home', { userName });
+            navigation.navigate('Intro');
           } else {
             navigation.navigate('Intro');
           }
@@ -86,12 +87,12 @@ const styles = StyleSheet.create({
     marginBottom: 40,
   },
   name: {
-    fontSize: 62,
+    fontSize: 50,
     marginBottom: 20,
     fontFamily: 'Lobster',
   },
   slogan: {
-    fontSize: 18,
+    fontSize: 14,
     fontFamily: 'Shippori'
   },
   circle: {

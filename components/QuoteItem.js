@@ -7,6 +7,7 @@ Splash.preventAutoHideAsync();
 const QuoteItem = ({ quote, author, onSelect, isSelected, isSelectionMode  }) => {
   const [fontsLoaded] = useFonts({
     'Shippori': require('../assets/fonts/ShipporiMincho-Regular.ttf'),
+    'Shippori-Bold': require('../assets/fonts/ShipporiMincho-SemiBold.ttf')
   });
 
   useEffect(() => {
@@ -16,15 +17,14 @@ const QuoteItem = ({ quote, author, onSelect, isSelected, isSelectionMode  }) =>
   }, [fontsLoaded]);
 
   return (
-    <View style={styles.container}>
+    <View style={[styles.container, isSelected && styles.selected]}>
     <Pressable onPress={onSelect} style={[
         styles.quoteContainer,
-        isSelected && styles.selected,
         isSelectionMode && styles.selectionMode,
       ]}
       disabled={!isSelectionMode}>
-      <Text style={styles.quoteText}>"{quote}"</Text>
-      {author && <Text style={styles.authorText}>― {author}</Text>}
+      <Text style={[styles.quoteText, isSelected && styles.selectedText]}>"{quote}"</Text>
+      {author && <Text style={[styles.authorText, isSelected && styles.selectedAuthor]}>― {author}</Text>}
     </Pressable>
     </View>
   );
@@ -32,18 +32,22 @@ const QuoteItem = ({ quote, author, onSelect, isSelected, isSelectionMode  }) =>
 
 const styles = StyleSheet.create({
   container: {
-    marginVertical: 10,
     paddingVertical: 10,
+    paddingTop: 20,
     borderBottomWidth: 1,
     borderBottomColor: '#878383',
     width: '100%',
+    paddingLeft: 10,
+    paddingRight: 10,
+    // backgroundColor: '#fff',
   },
   selected: {
-    backgroundColor: 'pink',
+    backgroundColor: '#f4f3ee'
   },
-  selectionMode: {
-    borderColor: 'black', 
-  },
+ selectedText:{
+ },
+ selectedAuthor:{
+ },
   quoteText: {
     fontSize: 16,
     textAlign: 'left',

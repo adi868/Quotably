@@ -115,7 +115,7 @@ function HomeScreen({ route, navigation }) {
           <Text style={styles.heading}>Hello{userName ? `, ${userName}` : ''}</Text>
         </View>
         <Text>{quotes.length === 0 ? `Add your first quote here` : ''}</Text>
-        <FlatList 
+        <FlatList showsVerticalScrollIndicator={false}
           data={quotes}
           keyExtractor={(item, index) => index.toString()}
           renderItem={({ item, index }) => <QuoteItem quote={item.quote} author={item.author} onSelect={() => isSelectionMode && handleSelectQuote(index)} isSelected={selectedQuotes.includes(index)} isSelectionMode={isSelectionMode} />}
@@ -147,8 +147,8 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     backgroundColor: '#FFFEF8',
     paddingTop: 40,
-    paddingLeft: 30,
-    paddingRight: 30,
+    paddingLeft: 20,
+    paddingRight: 20,
     paddingBottom: 30,
   },
   heading: {
@@ -162,6 +162,7 @@ const styles = StyleSheet.create({
     width: '100%',
     borderBottomWidth: 1,
     borderBottomColor: '#000',
+    paddingLeft: 15,
   },
   buttonContainer: {
     width: '100%',
@@ -169,6 +170,8 @@ const styles = StyleSheet.create({
     alignItems: 'flex-end',
     justifyContent: 'space-between',
     paddingTop: 20,
+    paddingLeft: 10,
+    paddingRight: 10,
   },
   removeContainer: {
     flex: 1,
