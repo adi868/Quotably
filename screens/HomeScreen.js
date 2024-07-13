@@ -3,9 +3,9 @@ import { StyleSheet, View, Text, Pressable, Image, FlatList, SafeAreaView } from
 import QuoteItem from '../components/QuoteItem';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { useFonts } from 'expo-font';
-import * as Splash from 'expo-splash-screen';
+import * as SplashScreen from 'expo-splash-screen';
 
-Splash.preventAutoHideAsync();
+SplashScreen.preventAutoHideAsync();
 
 function HomeScreen({ route, navigation }) {
   const [quotes, setQuotes] = useState([]);
@@ -14,12 +14,12 @@ function HomeScreen({ route, navigation }) {
   const [isSelectionMode, setIsSelectionMode] = useState(false);
 
   const [fontsLoaded] = useFonts({
-    'Shippori': require('../assets/fonts/ShipporiMincho-Bold.ttf')
+    'Shippori-Bold': require('../assets/fonts/ShipporiMincho-SemiBold.ttf')
   });
 
   useEffect(() => {
     if (fontsLoaded) {
-      Splash.hideAsync();
+      SplashScreen.hideAsync();
     }
   }, [fontsLoaded]);
 
@@ -104,6 +104,10 @@ function HomeScreen({ route, navigation }) {
     setIsSelectionMode(false);
   };
 
+  if (!fontsLoaded) {
+    return null;
+  }
+
   return (
     <SafeAreaView style={styles.outer}>
       <View style={styles.container}>
@@ -150,7 +154,7 @@ const styles = StyleSheet.create({
   heading: {
     fontSize: 27,
     paddingBottom: 20,
-    fontFamily: 'Shippori',
+    fontFamily: 'Shippori-Bold',
     textAlign: 'left',
     color: '#2F2F2F',
   },
@@ -164,7 +168,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'flex-end',
     justifyContent: 'space-between',
-    paddingTop: 20
+    paddingTop: 20,
   },
   removeContainer: {
     flex: 1,
@@ -182,8 +186,3 @@ const styles = StyleSheet.create({
 });
 
 export default HomeScreen;
-
-
-    {/* <Pressable onPress={handleRemoveUserName}>
-            <Text>Remove user</Text>
-          </Pressable> */}

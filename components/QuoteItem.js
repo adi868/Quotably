@@ -1,12 +1,20 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import { View, Text, StyleSheet, Pressable } from 'react-native';
-import { useFonts, ShipporiMincho_400Regular, ShipporiMincho_700Bold} from '@expo-google-fonts/shippori-mincho';
+import { useFonts } from 'expo-font';
+import * as Splash from 'expo-splash-screen';
 
+Splash.preventAutoHideAsync();
 const QuoteItem = ({ quote, author, onSelect, isSelected, isSelectionMode  }) => {
   const [fontsLoaded] = useFonts({
-    ShipporiMincho_400Regular,
-    ShipporiMincho_700Bold
+    'Shippori': require('../assets/fonts/ShipporiMincho-Regular.ttf'),
   });
+
+  useEffect(() => {
+    if (fontsLoaded) {
+      Splash.hideAsync();
+    }
+  }, [fontsLoaded]);
+
   return (
     <View style={styles.container}>
     <Pressable onPress={onSelect} style={[
@@ -40,7 +48,7 @@ const styles = StyleSheet.create({
     fontSize: 16,
     textAlign: 'left',
     marginBottom: 20,
-    fontFamily: 'ShipporiMincho_400Regular',
+    fontFamily: 'Shippori',
     color: "#342817",
 
   },
@@ -48,7 +56,7 @@ const styles = StyleSheet.create({
     fontSize: 14,
     textAlign: 'left',
     marginBottom: 17,
-    fontFamily: 'ShipporiMincho_400Regular',
+    fontFamily: 'Shippori',
     color: "#000",
   },
 });

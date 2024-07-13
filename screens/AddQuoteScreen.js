@@ -1,16 +1,25 @@
 import React, { useState } from 'react';
 import { View, Text, TextInput, StyleSheet, Pressable, Image } from 'react-native';
-import { useFonts, ShipporiMincho_400Regular, ShipporiMincho_700Bold} from '@expo-google-fonts/shippori-mincho';
+import { useFonts } from 'expo-font';
+import * as Splash from 'expo-splash-screen';
 
+Splash.preventAutoHideAsync();
 
 function AddQuoteScreen({ navigation }) {
   const [quote, setQuote] = useState('');
   const [author, setAuthor] = useState('');
 
   const [fontsLoaded] = useFonts({
-    ShipporiMincho_400Regular,
-    ShipporiMincho_700Bold
+    'Shippori': require('../assets/fonts/ShipporiMincho-Regular.ttf'),
+    'ShipporiBold': require('../assets/fonts/ShipporiMincho-Bold.ttf'),
   });
+
+  useEffect(() => {
+    if (fontsLoaded) {
+      Splash.hideAsync();
+    }
+  }, [fontsLoaded]);
+
 
   const handleAddQuote = () => {
     navigation.navigate('Home', { newQuote: { quote, author } });
@@ -44,7 +53,7 @@ const styles = StyleSheet.create({
     marginBottom: 20,
     width: '80%',
     paddingHorizontal: 10,
-    fontFamily: 'ShipporiMincho_400Regular'
+    fontFamily: 'Shippori'
   },
 });
 

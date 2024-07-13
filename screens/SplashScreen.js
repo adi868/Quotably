@@ -2,17 +2,25 @@ import React, { useEffect, useRef } from 'react';
 import { View, StyleSheet, Text, Animated } from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { LinearGradient } from 'expo-linear-gradient';
-import { useFonts, LobsterTwo_400Regular } from '@expo-google-fonts/lobster-two';
-import { ShipporiMincho_400Regular} from '@expo-google-fonts/shippori-mincho';
+import { useFonts } from 'expo-font';
+import * as Splash from 'expo-splash-screen';
+
+Splash.preventAutoHideAsync();
 
 function SplashScreen({ navigation }) {
   const circlePosition = useRef(new Animated.Value(0)).current;
   const circlePositionAlt = useRef(new Animated.Value(0)).current;
 
   const [fontsLoaded] = useFonts({
-    LobsterTwo_400Regular,
-    ShipporiMincho_400Regular
+    'Lobster': require('../assets/fonts/LobsterTwo-Regular.ttf'),
+    'Shippori': require('../assets/fonts/ShipporiMincho-Regular.ttf'),
   });
+
+  useEffect(() => {
+    if (fontsLoaded) {
+      Splash.hideAsync();
+    }
+  }, [fontsLoaded]);
 
   useEffect(() => {
     const checkUserName = async () => {
@@ -21,10 +29,8 @@ function SplashScreen({ navigation }) {
         setTimeout(() => {
           if (userName) {
             navigation.navigate('Home', { userName });
-            console.log('Directing to home screen');
           } else {
             navigation.navigate('Intro');
-            console.log('Directing to intro screen');
           }
         }, 2100);
       } catch (error) {
@@ -53,10 +59,14 @@ function SplashScreen({ navigation }) {
     ]).start();
   }, [circlePosition, circlePositionAlt]);
 
+  if (!fontsLoaded) {
+    return null;
+  }
+
   return (
     <LinearGradient colors={['#fff', '#F4E27F']} style={styles.container}>
-      <Animated.View style={[styles.circle_alt, { transform: [{ translateX: circlePositionAlt }] }]}/>
-      <Animated.View style={[styles.circle, { transform: [{ translateX: circlePosition }] }]}/>
+      <Animated.View style={[styles.circle_alt, { transform: [{ translateX: circlePositionAlt }] }]} />
+      <Animated.View style={[styles.circle, { transform: [{ translateX: circlePosition }] }]} />
       <View style={styles.text}>
         <Text style={styles.name}>Quotely</Text>
         <Text style={styles.slogan}>inspire, reflect, repeat</Text>
@@ -78,28 +88,28 @@ const styles = StyleSheet.create({
   name: {
     fontSize: 62,
     marginBottom: 20,
-    fontFamily: 'LobsterTwo_400Regular'
+    fontFamily: 'Lobster',
   },
   slogan: {
     fontSize: 18,
-    fontFamily: 'ShipporiMincho_400Regular'
+    fontFamily: 'Shippori'
   },
   circle: {
     width: 650,
     height: 620,
-    borderRadius: 1000, 
+    borderRadius: 1000,
     backgroundColor: '#f1fbf3',
-    position: 'absolute', 
-    top: '-20%', 
-    left: '30%', 
+    position: 'absolute',
+    top: '-20%',
+    left: '30%',
   },
   circle_alt: {
-    width: 630, 
-    height: 720, 
-    borderRadius: 1000, 
+    width: 630,
+    height: 720,
+    borderRadius: 1000,
     backgroundColor: '#fffef1',
     position: 'absolute',
-    top: '-15%', 
+    top: '-15%',
     left: '-10%',
   },
 });
