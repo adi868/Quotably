@@ -7,6 +7,8 @@ import { useFonts, ShipporiMincho_400Regular, ShipporiMincho_700Bold } from '@ex
 function HomeScreen({ route, navigation }) {
   const [quotes, setQuotes] = useState([]);
   const [userName, setUserName] = useState('');
+  const [selectedQuotes, setSelectedQuotes] = useState([]);
+  const [isSelectionMode, setIsSelectionMode] = useState(false);
 
   const [fontsLoaded] = useFonts({
     ShipporiMincho_400Regular,
@@ -14,13 +16,11 @@ function HomeScreen({ route, navigation }) {
   });
 
   useEffect(() => {
-    // Load async storage data when component mount
     const loadQuotes = async () => {
       try {
         const storedQuotes = await AsyncStorage.getItem('quotes');
         if (storedQuotes) {
           setQuotes(JSON.parse(storedQuotes));
-          console.log('Quotes loaded from storage:', JSON.parse(storedQuotes));
         }
       } catch (error) {
         console.error('Failed to load quotes from storage', error);
@@ -31,7 +31,6 @@ function HomeScreen({ route, navigation }) {
         const storedUserName = await AsyncStorage.getItem('userName');
         if (storedUserName) {
           setUserName(storedUserName);
-          console.log('Username loaded:', storedUserName);
         }
       } catch (error) {
         console.log('Failed to load username from storage', error);
@@ -41,7 +40,6 @@ function HomeScreen({ route, navigation }) {
     loadUserName();
   }, []);
 
-  // Listens for new quotes passed via navigation parameters and updates state accordingly, add to async storage
   useEffect(() => {
     if (route.params?.newQuote) {
       const updatedQuotes = [...quotes, route.params.newQuote];
@@ -56,7 +54,6 @@ function HomeScreen({ route, navigation }) {
     }
   }, [route.params?.newQuote]);
 
-  // Store and load user data on homescreen page
   useEffect(() => {
     if (route.params?.userName) {
       const newUserName = route.params.userName;
@@ -78,22 +75,51 @@ function HomeScreen({ route, navigation }) {
     }
   };
 
+  const handleSelectQuote = (index) => {
+    setSelectedQuotes((prevSelected) => (prevSelected.includes(index) ? prevSelected.filter((i) => i !== index) : [...prevSelected, index]));
+  };
+
+  const handleRemoveSelectedQuotes = async () => {
+    const updatedQuotes = quotes.filter((_, index) => !selectedQuotes.includes(index));
+    setQuotes(updatedQuotes);
+    setSelectedQuotes([]);
+    setIsSelectionMode(false);
+    try {
+      await AsyncStorage.setItem('quotes', JSON.stringify(updatedQuotes));
+    } catch (error) {
+      console.error('Failed to save updated quotes to storage', error);
+    }
+  };
+
+  const handleCancelSelection = () => {
+    setSelectedQuotes([]);
+    setIsSelectionMode(false);
+  };
+
   return (
     <SafeAreaView style={styles.outer}>
       <View style={styles.container}>
         <View style={styles.greetingContainer}>
           <Text style={styles.heading}>Hello{userName ? `, ${userName}` : ''}</Text>
         </View>
-        <Text>{quotes ? '' : `Add your first quote here`}</Text>
-        <FlatList data={quotes} keyExtractor={(item, index) => index.toString()} renderItem={({ item }) => <QuoteItem quote={item.quote} author={item.author} />} />
+        <Text>{quotes.length === 0 ? `Add your first quote here` : ''}</Text>
+        <FlatList 
+          data={quotes}
+          keyExtractor={(item, index) => index.toString()}
+          renderItem={({ item, index }) => <QuoteItem quote={item.quote} author={item.author} onSelect={() => isSelectionMode && handleSelectQuote(index)} isSelected={selectedQuotes.includes(index)} isSelectionMode={isSelectionMode} />}
+        />
         <View style={styles.buttonContainer}>
-          <Pressable title='Remove quote' style={styles.button}>
-            <Image source={require('../assets/images/remove.png')} style={styles.image} />
-          </Pressable>
-          <Pressable title='Remove username' onPress={handleRemoveUserName}>
-            <Text>Remove user</Text>
-          </Pressable>
-          <Pressable title='Add a quote' style={styles.button} onPress={() => navigation.navigate('AddQuote')}>
+          <View style={styles.removeContainer}>
+            <Pressable onPress={isSelectionMode ? handleCancelSelection : () => setIsSelectionMode(true)}>
+              <Image source={isSelectionMode ? require('../assets/images/cancel.png') : require('../assets/images/remove.png')} />
+            </Pressable>
+            {isSelectionMode && selectedQuotes.length > 0 && (
+              <Pressable style={styles.check} onPress={handleRemoveSelectedQuotes}>
+                <Image source={require('../assets/images/check.png')} />
+              </Pressable>
+            )}
+          </View>
+          <Pressable onPress={() => navigation.navigate('AddQuote')}>
             <Image source={require('../assets/images/add.png')} style={styles.image} />
           </Pressable>
         </View>
@@ -111,11 +137,11 @@ const styles = StyleSheet.create({
     paddingTop: 40,
     paddingLeft: 30,
     paddingRight: 30,
-    paddingBottom: 40,
+    paddingBottom: 30,
   },
   heading: {
-    fontSize: 30,
-    paddingBottom: 15,
+    fontSize: 27,
+    paddingBottom: 20,
     fontFamily: 'ShipporiMincho_700Bold',
     textAlign: 'left',
     color: '#2F2F2F',
@@ -127,10 +153,19 @@ const styles = StyleSheet.create({
   },
   buttonContainer: {
     width: '100%',
-    flex: 1,
     flexDirection: 'row',
     alignItems: 'flex-end',
     justifyContent: 'space-between',
+    paddingTop: 20
+  },
+  removeContainer: {
+    flex: 1,
+    flexDirection: 'row',
+    justifyContent: 'flex-start',
+    alignItems: 'flex-end',
+  },
+  check: {
+    marginLeft: 28,
   },
   outer: {
     flex: 1,
@@ -139,3 +174,8 @@ const styles = StyleSheet.create({
 });
 
 export default HomeScreen;
+
+
+    {/* <Pressable onPress={handleRemoveUserName}>
+            <Text>Remove user</Text>
+          </Pressable> */}
