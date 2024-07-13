@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { View, Text, TextInput, StyleSheet, Pressable, Image } from 'react-native';
 import { useFonts } from 'expo-font';
 import * as Splash from 'expo-splash-screen';
