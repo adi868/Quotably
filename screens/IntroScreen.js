@@ -1,35 +1,33 @@
-import React, { useState, useEffect } from 'react';
-import { StyleSheet, View, Text, Pressable, Image, TextInput, SafeAreaView, TouchableWithoutFeedback, Keyboard } from 'react-native';
-import { useFonts } from 'expo-font';
-import * as Splash from 'expo-splash-screen';
+import React, { useState, useEffect, useRef } from 'react';
+import { StyleSheet, View, Text, Pressable, Image, TextInput, SafeAreaView, TouchableWithoutFeedback, Keyboard, Animated } from 'react-native';
 
 function IntroScreen({ navigation }) {
   const [name, setName] = useState('');
 
   return (
     <TouchableWithoutFeedback onPress={Keyboard.dismiss} accessible={false}>
-    <SafeAreaView style={styles.outer}>
-      <View style={styles.container}>
-        <View style={styles.introContainer}>
-          <View style={styles.headingContainer}>
-            <Text style={styles.heading}>Welcome</Text>
+      <SafeAreaView style={styles.outer}>
+        <View style={styles.container}>
+          <View style={styles.introContainer}>
+            <View style={styles.headingContainer}>
+              <Text style={styles.heading}>Welcome</Text>
+            </View>
+            <Text style={styles.subHeading}>Store all your favorite quotes in one place</Text>
           </View>
-          <Text style={styles.subHeading}>Store all your favorite quotes in one place</Text>
+          <View style={styles.imageContainer}>
+            <Image style={styles.imageCenter} source={require('../assets/images/book.png')} />
+          </View>
+          <View style={styles.nameContainer}>
+            <Text style={styles.name}>Do you want to add your name?</Text>
+            <TextInput style={styles.input} placeholder='your name' value={name} onChangeText={setName} />
+          </View>
+          <View style={styles.buttonContainer}>
+            <Pressable title='Go to Home' style={styles.button} onPress={() => navigation.navigate('Home', { userName: name })}>
+              <Image source={require('../assets/images/arrow_forward.png')} style={styles.image} />
+            </Pressable>
+          </View>
         </View>
-        <View style={styles.imageContainer}>
-          <Image style={styles.imageCenter} source={require('../assets/images/book.png')} />
-        </View>
-        <View style={styles.nameContainer}>
-          <Text style={styles.name}>Do you want to add your name?</Text>
-          <TextInput style={styles.input} placeholder='your name' value={name} onChangeText={setName} />
-        </View>
-        <View style={styles.buttonContainer}>
-          <Pressable title='Go to Home' style={styles.button} onPress={() => navigation.navigate('Home', { userName: name })}>
-            <Image source={require('../assets/images/arrow_forward.png')} style={styles.image} />
-          </Pressable>
-        </View>
-      </View>
-    </SafeAreaView>
+      </SafeAreaView>
     </TouchableWithoutFeedback>
   );
 }

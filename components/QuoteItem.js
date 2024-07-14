@@ -34,7 +34,6 @@ const styles = StyleSheet.create({
     width: '100%',
     paddingLeft: 10,
     paddingRight: 10,
-    // backgroundColor: '#fff',
   },
   selected: {
     backgroundColor: '#f4f3ee',
