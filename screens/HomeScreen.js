@@ -115,7 +115,7 @@ function HomeScreen({ route, navigation }) {
           <Text style={styles.heading}>Hello{userName ? `, ${userName}` : ''}</Text>
         </View>
         {quotes.length === 0 ? <Text style={styles.firstQuote}>Add your first quote here</Text> : null}
-        <FlatList
+        <FlatList style={styles.flatList}
           showsVerticalScrollIndicator={false}
           data={quotes}
           keyExtractor={(item, index) => index.toString()}
@@ -183,6 +183,9 @@ const styles = StyleSheet.create({
   },
   check: {
     marginLeft: 28,
+  },
+  flatList: {
+    width: '100%'
   },
   firstQuote: {
     marginTop: 40,
