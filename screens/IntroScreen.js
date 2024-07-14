@@ -8,7 +8,7 @@ function IntroScreen({ navigation }) {
 
   const [fontsLoaded] = useFonts({
     'Shippori': require('../assets/fonts/ShipporiMincho-Regular.ttf'),
-    'Shippori-SemiBold': require('../assets/fonts/ShipporiMincho-SemiBold.ttf'),
+    'Shippori-Semi-Bold': require('../assets/fonts/ShipporiMincho-SemiBold.ttf'),
   });
 
   useEffect(() => {
@@ -63,12 +63,12 @@ const styles = StyleSheet.create({
   heading: {
     fontSize: 32,
     paddingBottom: 10,
-    fontFamily: 'Shippori',
+    fontFamily: 'Shippori-Semi-Bold',
     width: '100%',
     textAlign: 'left',
   },
   headingContainer: {
-    borderBottomWidth: 2,
+    borderBottomWidth: 1,
     borderBottomColor: '#000',
     width: '100%',
     marginBottom: 30,

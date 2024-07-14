@@ -14,7 +14,7 @@ function HomeScreen({ route, navigation }) {
   const [isSelectionMode, setIsSelectionMode] = useState(false);
 
   const [fontsLoaded] = useFonts({
-    'Shippori-Bold': require('../assets/fonts/ShipporiMincho-SemiBold.ttf')
+    'Shippori-Semi-Bold': require('../assets/fonts/ShipporiMincho-SemiBold.ttf'),
   });
 
   useEffect(() => {
@@ -114,8 +114,9 @@ function HomeScreen({ route, navigation }) {
         <View style={styles.greetingContainer}>
           <Text style={styles.heading}>Hello{userName ? `, ${userName}` : ''}</Text>
         </View>
-        <Text>{quotes.length === 0 ? `Add your first quote here` : ''}</Text>
-        <FlatList showsVerticalScrollIndicator={false}
+        {quotes.length === 0 ? <Text style={styles.firstQuote}>Add your first quote here</Text> : null}
+        <FlatList
+          showsVerticalScrollIndicator={false}
           data={quotes}
           keyExtractor={(item, index) => index.toString()}
           renderItem={({ item, index }) => <QuoteItem quote={item.quote} author={item.author} onSelect={() => isSelectionMode && handleSelectQuote(index)} isSelected={selectedQuotes.includes(index)} isSelectionMode={isSelectionMode} />}
@@ -130,6 +131,7 @@ function HomeScreen({ route, navigation }) {
                 <Image source={require('../assets/images/check.png')} />
               </Pressable>
             )}
+            <Text onPress={handleRemoveUserName}>Remove name</Text>
           </View>
           <Pressable onPress={() => navigation.navigate('AddQuote')}>
             <Image source={require('../assets/images/add.png')} style={styles.image} />
@@ -154,7 +156,7 @@ const styles = StyleSheet.create({
   heading: {
     fontSize: 27,
     paddingBottom: 20,
-    fontFamily: 'Shippori-Bold',
+    fontFamily: 'Shippori-Semi-Bold',
     textAlign: 'left',
     color: '#2F2F2F',
   },
@@ -162,7 +164,7 @@ const styles = StyleSheet.create({
     width: '100%',
     borderBottomWidth: 1,
     borderBottomColor: '#000',
-    paddingLeft: 15,
+    paddingLeft: 14,
   },
   buttonContainer: {
     width: '100%',
@@ -181,6 +183,12 @@ const styles = StyleSheet.create({
   },
   check: {
     marginLeft: 28,
+  },
+  firstQuote: {
+    marginTop: 40,
+    fontSize: 18,
+    fontFamily: 'Shippori',
+    textAlign: 'center',
   },
   outer: {
     flex: 1,

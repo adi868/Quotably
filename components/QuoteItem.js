@@ -7,7 +7,6 @@ Splash.preventAutoHideAsync();
 const QuoteItem = ({ quote, author, onSelect, isSelected, isSelectionMode  }) => {
   const [fontsLoaded] = useFonts({
     'Shippori': require('../assets/fonts/ShipporiMincho-Regular.ttf'),
-    'Shippori-Bold': require('../assets/fonts/ShipporiMincho-SemiBold.ttf')
   });
 
   useEffect(() => {
