@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { StyleSheet, View, Text, Pressable, Image, TextInput, SafeAreaView } from 'react-native';
+import { StyleSheet, View, Text, Pressable, Image, TextInput, SafeAreaView, TouchableWithoutFeedback, Keyboard } from 'react-native';
 import { useFonts } from 'expo-font';
 import * as Splash from 'expo-splash-screen';
 
@@ -18,6 +18,7 @@ function IntroScreen({ navigation }) {
   }, [fontsLoaded]);
 
   return (
+    <TouchableWithoutFeedback onPress={Keyboard.dismiss} accessible={false}>
     <SafeAreaView style={styles.outer}>
       <View style={styles.container}>
         <View style={styles.introContainer}>
@@ -40,6 +41,7 @@ function IntroScreen({ navigation }) {
         </View>
       </View>
     </SafeAreaView>
+    </TouchableWithoutFeedback>
   );
 }
 
