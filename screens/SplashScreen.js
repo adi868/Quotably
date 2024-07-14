@@ -14,6 +14,7 @@ function SplashScreen({ navigation }) {
   const [fontsLoaded] = useFonts({
     'Lobster': require('../assets/fonts/LobsterTwo-Regular.ttf'),
     'Shippori': require('../assets/fonts/ShipporiMincho-Regular.ttf'),
+    'Shippori-Semi-Bold': require('../assets/fonts/ShipporiMincho-SemiBold.ttf'),
   });
 
   useEffect(() => {

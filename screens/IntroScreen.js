@@ -6,17 +6,6 @@ import * as Splash from 'expo-splash-screen';
 function IntroScreen({ navigation }) {
   const [name, setName] = useState('');
 
-  const [fontsLoaded] = useFonts({
-    'Shippori': require('../assets/fonts/ShipporiMincho-Regular.ttf'),
-    'Shippori-Semi-Bold': require('../assets/fonts/ShipporiMincho-SemiBold.ttf'),
-  });
-
-  useEffect(() => {
-    if (fontsLoaded) {
-      Splash.hideAsync();
-    }
-  }, [fontsLoaded]);
-
   return (
     <TouchableWithoutFeedback onPress={Keyboard.dismiss} accessible={false}>
     <SafeAreaView style={styles.outer}>
@@ -28,7 +17,7 @@ function IntroScreen({ navigation }) {
           <Text style={styles.subHeading}>Store all your favorite quotes in one place</Text>
         </View>
         <View style={styles.imageContainer}>
-          <Image style={styles.imageCenter} source={require('../assets/images/plant.png')} />
+          <Image style={styles.imageCenter} source={require('../assets/images/book.png')} />
         </View>
         <View style={styles.nameContainer}>
           <Text style={styles.name}>Do you want to add your name?</Text>
@@ -74,9 +63,11 @@ const styles = StyleSheet.create({
     marginBottom: 30,
     marginLeft: 5,
   },
-  imageContainer: {},
+  imageContainer: {
+    marginBottom: 50,
+    marginRight: 10
+  },
   imageCenter: {
-    opacity: 0,
     height: 200,
     width: 250,
   },
@@ -112,7 +103,7 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     borderColor: '#E6E6E6',
     color: '#969696',
-    height: 70,
+    height: 65,
     fontSize: 18,
     padding: 10,
     paddingLeft: 25,
@@ -128,7 +119,7 @@ const styles = StyleSheet.create({
     backgroundColor: '#f3f2ed',
     padding: 30,
     borderRadius: 100,
-    marginTop: 20,
+    marginTop: 10,
   },
 });
 

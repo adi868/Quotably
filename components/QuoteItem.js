@@ -32,7 +32,7 @@ const QuoteItem = ({ quote, author, onSelect, isSelected, isSelectionMode  }) =>
 const styles = StyleSheet.create({
   container: {
     paddingVertical: 10,
-    paddingTop: 20,
+    paddingTop: 25,
     borderBottomWidth: 1,
     borderBottomColor: '#878383',
     width: '100%',
