@@ -28,8 +28,7 @@ function SplashScreen({ navigation }) {
         const userName = await AsyncStorage.getItem('userName');
         setTimeout(() => {
           if (userName) {
-            // navigation.navigate('Home', { userName });
-            navigation.navigate('Intro');
+            navigation.navigate('Home', { userName });
           } else {
             navigation.navigate('Intro');
           }
