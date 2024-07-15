@@ -1,5 +1,5 @@
-import React, { useState, useEffect, useRef } from 'react';
-import { StyleSheet, View, Text, Pressable, Image, TextInput, SafeAreaView, TouchableWithoutFeedback, Keyboard, Animated } from 'react-native';
+import React, { useState } from 'react';
+import { StyleSheet, View, Text, Pressable, Image, TextInput, SafeAreaView, TouchableWithoutFeedback, Keyboard } from 'react-native';
 
 function IntroScreen({ navigation }) {
   const [name, setName] = useState('');
@@ -63,7 +63,7 @@ const styles = StyleSheet.create({
   },
   imageContainer: {
     marginBottom: 50,
-    marginRight: 10
+    marginRight: 10,
   },
   imageCenter: {
     height: 200,
