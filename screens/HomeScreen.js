@@ -72,16 +72,16 @@ function HomeScreen({ route, navigation }) {
     }
   }, [route.params?.userName]);
 
-  const handleRemoveUserName = async () => {
-    try {
-      await AsyncStorage.removeItem('userName');
-      setUserName('');
-      navigation.navigate('Intro');
-      console.log('Username successfully removed');
-    } catch (error) {
-      console.log('Failed to remove username from storage', error);
-    }
-  };
+  // const handleRemoveUserName = async () => {
+  //   try {
+  //     await AsyncStorage.removeItem('userName');
+  //     setUserName('');
+  //     navigation.navigate('Intro');
+  //     console.log('Username successfully removed');
+  //   } catch (error) {
+  //     console.log('Failed to remove username from storage', error);
+  //   }
+  // };
 
   const handleSelectQuote = (index) => {
     setSelectedQuotes((prevSelected) => (prevSelected.includes(index) ? prevSelected.filter((i) => i !== index) : [...prevSelected, index]));
@@ -131,7 +131,6 @@ function HomeScreen({ route, navigation }) {
                 <Image source={require('../assets/images/check.png')} />
               </Pressable>
             )}
-            <Text onPress={handleRemoveUserName}>Remove name</Text>
           </View>
           <Pressable onPress={() => navigation.navigate('AddQuote')}>
             <Image source={require('../assets/images/add.png')} style={styles.image} />
