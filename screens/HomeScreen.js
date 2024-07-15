@@ -156,7 +156,7 @@ const styles = StyleSheet.create({
   heading: {
     fontSize: 27,
     paddingBottom: 20,
-    fontFamily: 'Shippori-Semi-Bold',
+    fontFamily: 'Shippori-Bold',
     textAlign: 'left',
     color: '#2F2F2F',
   },

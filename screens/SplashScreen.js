@@ -1,7 +1,7 @@
 import React, { useEffect, useRef } from 'react';
 import { View, StyleSheet, Text, Animated } from 'react-native';
-import AsyncStorage from '@react-native-async-storage/async-storage';
 import { LinearGradient } from 'expo-linear-gradient';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 import { useFonts } from 'expo-font';
 import * as Splash from 'expo-splash-screen';
 
@@ -15,6 +15,7 @@ function SplashScreen({ navigation }) {
     'Lobster': require('../assets/fonts/LobsterTwo-Regular.ttf'),
     'Shippori': require('../assets/fonts/ShipporiMincho-Regular.ttf'),
     'Shippori-Semi-Bold': require('../assets/fonts/ShipporiMincho-SemiBold.ttf'),
+    'Shippori-Bold': require('../assets/fonts/ShipporiMincho-Bold.ttf'),
   });
 
   useEffect(() => {
@@ -48,12 +49,12 @@ function SplashScreen({ navigation }) {
   useEffect(() => {
     Animated.parallel([
       Animated.timing(circlePosition, {
-        toValue: -100,
+        toValue: -50,
         duration: 1000,
         useNativeDriver: false,
       }),
       Animated.timing(circlePositionAlt, {
-        toValue: -50,
+        toValue: -100,
         duration: 1000,
         useNativeDriver: false,
       }),
@@ -65,9 +66,13 @@ function SplashScreen({ navigation }) {
   }
 
   return (
-    <LinearGradient colors={['#fff', '#F4E27F']} style={styles.container}>
-      <Animated.View style={[styles.circle_alt, { transform: [{ translateX: circlePositionAlt }] }]} />
-      <Animated.View style={[styles.circle, { transform: [{ translateX: circlePosition }] }]} />
+    <LinearGradient colors={['#fff', '#FDF8C9', '#F4E27F']} style={styles.container}>
+      <Animated.View style={[styles.animateContainer, { transform: [{ translateX: circlePosition }] }]}>
+        <LinearGradient colors={['#fff', '#fff', '#fff', '#FFFCDF']} style={styles.circle_alt} />
+      </Animated.View>
+      <Animated.View style={[styles.animateContainerAlt, { transform: [{ translateX: circlePositionAlt }] }]}>
+        <LinearGradient colors={['#f1fbf3', '#f1fbf3']} style={styles.circle} />
+      </Animated.View>
       <View style={styles.text}>
         <Text style={styles.name}>Quotely</Text>
         <Text style={styles.slogan}>inspire, reflect, repeat</Text>
@@ -87,31 +92,38 @@ const styles = StyleSheet.create({
     marginBottom: 40,
   },
   name: {
-    fontSize: 50,
+    fontSize: 56,
     marginBottom: 20,
     fontFamily: 'Lobster',
+    color: '#262626',
+    marginLeft: 8,
   },
   slogan: {
-    fontSize: 14,
-    fontFamily: 'Shippori'
+    fontSize: 17,
+    fontFamily: 'Shippori',
+    color: '#636363',
+    marginLeft: 3,
+    marginRight: -3,
   },
   circle: {
     width: 650,
     height: 620,
     borderRadius: 1000,
-    backgroundColor: '#f1fbf3',
+  },
+  animateContainerAlt: {
     position: 'absolute',
     top: '-20%',
     left: '30%',
+  },
+  animateContainer: {
+    position: 'absolute',
+    top: '-15%',
+    left: '-10%',
   },
   circle_alt: {
     width: 630,
     height: 720,
     borderRadius: 1000,
-    backgroundColor: '#fffef1',
-    position: 'absolute',
-    top: '-15%',
-    left: '-10%',
   },
 });
 

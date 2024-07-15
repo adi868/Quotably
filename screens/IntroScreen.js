@@ -50,7 +50,7 @@ const styles = StyleSheet.create({
   heading: {
     fontSize: 32,
     paddingBottom: 10,
-    fontFamily: 'Shippori-Semi-Bold',
+    fontFamily: 'Shippori-Bold',
     width: '100%',
     textAlign: 'left',
   },
