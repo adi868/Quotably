@@ -85,7 +85,6 @@ const styles = StyleSheet.create({
     verticalAlign: 'top',
   },
   inputAuthor: {
-    color: '#969696',
   },
   heading: {
     fontFamily: 'Shippori-Semi-Bold',

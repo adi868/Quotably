@@ -45,14 +45,14 @@ const styles = StyleSheet.create({
     textAlign: 'left',
     marginBottom: 20,
     fontFamily: 'Shippori',
-    color: '#342817',
+    color: '#000',
   },
   authorText: {
     fontSize: 14,
     textAlign: 'left',
     marginBottom: 17,
     fontFamily: 'Shippori',
-    color: '#000',
+    color: '#342817',
   },
 });
 
