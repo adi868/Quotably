@@ -69,3 +69,5 @@ Happy quoting!
 
 ---
 
+© Adina Cianciotto adi868
+
