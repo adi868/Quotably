@@ -27,7 +27,7 @@ A React Native application built with Expo that allows users to store, update, a
 
 1. Clone the repository:
    ```bash
-   git clone https://github.com/adi868/quotably
+   git clone https://github.com/adi868/Quotably.git
    ```
 2. Navigate to the project directory:
    ```bash
@@ -48,9 +48,7 @@ A React Native application built with Expo that allows users to store, update, a
 quotely/
 ├── assets/           # Asset files such as images and fonts
 ├── components/       # Reusable UI components
-├── navigation/       # Navigation setup
 ├── screens/          # Screen components
-├── storage/          # Async Storage utility functions
 ├── App.js            # Entry point of the application
 ├── app.json          # Expo configuration
 ├── package.json      # Project dependencies and scripts
