@@ -68,8 +68,8 @@ quotely/
 Happy quoting!
 
 ---
-
-![Screenshot of splash screen](assets/images/splash_screenshot.png) ![Screenshot of splash screen](assets/images/welcome_screenshot.png)
+![Screenshot of splash screen](assets/images/figma.png)
+---
 
 © Adina Cianciotto adi868
 
